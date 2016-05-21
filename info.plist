@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>kyungw00k.alfred.daumbook</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>306BF550-5016-440E-B66B-A6C08E83AB03</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>69CB1900-2EAD-4E84-8858-B007D8E0C8CA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D64EF400-837E-45FD-BF81-EEF9E92D0441</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>306BF550-5016-440E-B66B-A6C08E83AB03</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Kyungwook Park</string>
+	<key>description</key>
+	<string>Daum 책 검색을 Alfred에서!</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Daum Book Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(argv) {
+  var query = JSON.parse(argv[0]);
+  return query.link;
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>306BF550-5016-440E-B66B-A6C08E83AB03</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>URL="{query}"
+
+open $URL</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>69CB1900-2EAD-4E84-8858-B007D8E0C8CA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>dabs</string>
+				<key>queuedelaycustom</key>
+				<integer>5</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>2</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>검색 중입니다.</string>
+				<key>script</key>
+				<string>//
+// Emulating npm's require()
+// (https://github.com/dtinth/JXA-Cookbook/wiki/Importing-Scripts)
+//
+
+ObjC.import('Foundation');
+var fm = $.NSFileManager.defaultManager;
+var require = function (path) {
+  var contents = fm.contentsAtPath(path.toString()); // NSData
+  contents = $.NSString.alloc.initWithDataEncoding(contents, $.NSUTF8StringEncoding);
+
+  var module = {exports: {}};
+  var exports = module.exports;
+  eval(ObjC.unwrap(contents));
+
+  return module.exports;
+};
+
+//
+// Use unorm for `String.prototype.normalize` polyfill
+// (https://github.com/walling/unorm/issues/6)
+//
+
+require('./unorm.js')
+
+function run(argv) {
+  var search = require('./search.js');
+  var query = argv[0];
+  return search(query);
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Daum 책 서비스에서 제공되는 모든 책에 대한 서지 정보 및 리뷰 본문검색 서비스를 제공할수 있게 해 줍니다.
+다음 책 서비스에서 제공되는 모든 책에 대한 서지 정보 및 리뷰 본문검색 서비스를 제공할수 있게 해 줍니다.
+다음 책 서비스에서 제공되는 모든 책에 대한 서지 정보 및 리뷰 본문검색 서비스를 제공할수 있게 해 줍니다.
+다음 책 서비스에서 제공되는 모든 책에 대한 서지 정보 및 리뷰 본문검색 서비스를 제공할수 있게 해 줍니다.</string>
+				<key>title</key>
+				<string>Daum 책 검색</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D64EF400-837E-45FD-BF81-EEF9E92D0441</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>306BF550-5016-440E-B66B-A6C08E83AB03</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>69CB1900-2EAD-4E84-8858-B007D8E0C8CA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>730</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>D64EF400-837E-45FD-BF81-EEF9E92D0441</key>
+		<dict>
+			<key>xpos</key>
+			<integer>90</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://github.com/kyungw00k/alfred-daumbook-workflow/</string>
+</dict>
+</plist>
